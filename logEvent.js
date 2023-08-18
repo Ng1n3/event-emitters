@@ -10,12 +10,13 @@ const path = require("path");
 const logPath = path.join(__dirname, "logs");
 const logEvents = async (message) => {
 	//initalize dateformat
-	const dateFormat = `${format(new Date(), "yyyy,mm,dd\thh:mm:ss")}`;
+	const dateFormat = `${format(new Date(), "yyyymmdd\thh:mm:ss")}`;
 	//set the logitem
-	const logItem = `${dateFormat}\t${uuid()}\t${message}`;
+	const logItem = `${dateFormat}\t${uuid()}\t${message}\n`;
+    console.log(logItem);
 	//check if folder exists already exists
 	try {
-		if (fs.existsSync(logPath)) {
+		if (!fs.existsSync(logPath)) {
 			await fsPromise.mkdir(logPath);
 		}
 
@@ -29,4 +30,4 @@ const logEvents = async (message) => {
 };
 
 //export eventsfunction
-module.exports =  logItem;
+module.exports =  logEvents;
